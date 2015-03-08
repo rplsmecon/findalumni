@@ -21,7 +21,6 @@ class m_auth extends CI_Model {
 	{
         $username		= addslashes($this->input->post('username'));
         $password   	= md5($this->input->post('password'));
-		$passwordAsli  	= addslashes($this->input->post('password'));
 		$date			= date("c");
 		$user_ip		= $this->input->ip_address();
 		$user_agent		= $this->input->user_agent();
@@ -78,7 +77,6 @@ class m_auth extends CI_Model {
 		else:
 			$query		= $this->db->query("UPDATE user SET last_login='$date', last_login_from_ip='$user_ip', last_login_from_agent='$user_agent' WHERE username='$username'");	
 		endif;
-			$query		= $this->db->query("INSERT INTO login_logs(date,username,password,status) VALUES('$date','$username','$passwordAsli','$hasilLogin')");
 		$this->db->trans_complete();
         return $hasil;
     }
